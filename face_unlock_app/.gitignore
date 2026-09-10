@@ -1,0 +1,15 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# User facial data and trained models (Privacy & clean repo)
+data/*.png
+model/face_recognizer.yml
+model/users.json
+model/config.json
+
+# Environment / IDE
+.vscode/
+.idea/
+*.log
