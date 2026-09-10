@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio - Developer & Problem Solver</title>
+  <meta name="description" content="Personal portfolio showcasing modern web projects, technical skills, and engineering experience." />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              200: '#c7d2fe',
+              300: '#a5b4fc',
+              400: '#818cf8',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+              800: '#3730a3',
+              900: '#312e81',
+            }
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body class="min-h-screen bg-slate-900 text-slate-100 transition-colors duration-300 selection:bg-brand-500 selection:text-white" id="app-body">
+
+  <!-- Fixed Background Ambient Glow -->
+  <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+    <div class="absolute -top-40 -left-40 w-96 h-96 bg-brand-500/20 rounded-full blur-3xl glow-effect"></div>
+    <div class="absolute top-1/3 -right-40 w-96 h-96 bg-cyan-500/15 rounded-full blur-3xl glow-effect" style="animation-delay: 2s;"></div>
+    <div class="absolute -bottom-40 left-1/3 w-96 h-96 bg-purple-500/15 rounded-full blur-3xl glow-effect" style="animation-delay: 4s;"></div>
+  </div>
+
+  <!-- Navigation Bar -->
+  <header class="sticky top-0 z-50 glass-nav transition-colors duration-300">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      
+      <!-- Brand Logo -->
+      <a href="#hero" class="flex items-center gap-2.5 font-bold text-lg tracking-tight group">
+        <span class="w-9 h-9 rounded-xl bg-gradient-to-tr from-brand-600 to-cyan-500 flex items-center justify-center text-white font-mono shadow-md shadow-brand-500/20 group-hover:scale-105 transition-transform" id="nav-initials">
+          YR
+        </span>
+        <span class="text-slate-100 group-hover:text-brand-400 transition-colors font-semibold text-base sm:text-lg" id="nav-name">
+          Yash Rana
+        </span>
+      </a>
+
+      <!-- Desktop Navigation Menu -->
+      <nav class="hidden md:flex items-center gap-7 text-sm font-medium text-slate-300">
+        <a href="#about" class="hover:text-brand-400 transition-colors">About</a>
+        <a href="#skills" class="hover:text-brand-400 transition-colors">Skills</a>
+        <a href="#projects" class="hover:text-brand-400 transition-colors">Projects</a>
+        <a href="#timeline" class="hover:text-brand-400 transition-colors">Experience</a>
+        <a href="#contact" class="hover:text-brand-400 transition-colors">Contact</a>
+      </nav>
+
+      <!-- Right Action Items (Theme Toggle & CTA) -->
+      <div class="flex items-center gap-3">
+        <!-- Theme Toggle Button -->
+        <button id="theme-toggle" aria-label="Toggle Theme" class="w-10 h-10 rounded-xl flex items-center justify-center bg-slate-800/80 hover:bg-slate-700/80 text-slate-300 hover:text-white border border-slate-700/60 transition-all">
+          <i data-lucide="moon" id="theme-icon" class="w-5 h-5"></i>
+        </button>
+
+        <!-- Resume CTA Link -->
+        <a href="#contact" id="nav-cta" class="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-semibold bg-brand-600 hover:bg-brand-500 text-white shadow-md shadow-brand-600/25 hover:shadow-brand-600/40 transition-all">
+          <span>Let's Talk</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </a>
+
+        <!-- Mobile Menu Hamburger Button -->
+        <button id="mobile-menu-btn" aria-label="Toggle Menu" class="md:hidden w-10 h-10 rounded-xl flex items-center justify-center bg-slate-800/80 hover:bg-slate-700 text-slate-300 border border-slate-700/60 transition-all">
+          <i data-lucide="menu" id="menu-icon" class="w-5 h-5"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-menu" class="hidden md:hidden border-t border-slate-800 px-4 pt-3 pb-6 space-y-2 bg-slate-900/95 backdrop-blur-xl transition-all">
+      <a href="#about" class="mobile-nav-link block px-3 py-2 rounded-lg text-base font-medium text-slate-200 hover:bg-slate-800 hover:text-brand-400">About</a>
+      <a href="#skills" class="mobile-nav-link block px-3 py-2 rounded-lg text-base font-medium text-slate-200 hover:bg-slate-800 hover:text-brand-400">Skills</a>
+      <a href="#projects" class="mobile-nav-link block px-3 py-2 rounded-lg text-base font-medium text-slate-200 hover:bg-slate-800 hover:text-brand-400">Projects</a>
+      <a href="#timeline" class="mobile-nav-link block px-3 py-2 rounded-lg text-base font-medium text-slate-200 hover:bg-slate-800 hover:text-brand-400">Experience</a>
+      <a href="#contact" class="mobile-nav-link block px-3 py-2 rounded-lg text-base font-medium text-slate-200 hover:bg-slate-800 hover:text-brand-400">Contact</a>
+      <div class="pt-2">
+        <a href="#contact" class="block text-center w-full py-2.5 rounded-xl font-semibold bg-brand-600 hover:bg-brand-500 text-white shadow-md">
+          Get in Touch
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-28 sm:space-y-36 pb-24 pt-8 sm:pt-14">
+
+    <!-- ==================== HERO SECTION ==================== -->
+    <section id="hero" class="pt-6 sm:pt-12 flex flex-col-reverse lg:flex-row items-center justify-between gap-12 lg:gap-8">
+      <!-- Left Content -->
+      <div class="flex-1 text-center lg:text-left space-y-6 max-w-2xl">
+        <!-- Availability Badge -->
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold uppercase tracking-wider">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+          <span class="w-2 h-2 rounded-full bg-emerald-400 -ml-4"></span>
+          <span>Available for New Projects</span>
+        </div>
+
+        <!-- Greeting & Name -->
+        <div class="space-y-2">
+          <p class="text-brand-400 font-mono text-sm sm:text-base font-medium">Hello world, I'm</p>
+          <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-white" id="hero-name">
+            Yash Rana
+          </h1>
+          <div class="h-10 sm:h-12 flex items-center justify-center lg:justify-start text-xl sm:text-2xl font-semibold text-slate-300">
+            <span id="typewriter-text" class="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 via-indigo-300 to-cyan-400">Full-Stack Developer</span>
+            <span class="typing-caret h-6 sm:h-8"></span>
+          </div>
+        </div>
+
+        <!-- Tagline -->
+        <p class="text-slate-400 text-base sm:text-lg leading-relaxed max-w-xl mx-auto lg:mx-0" id="hero-tagline">
+          Building scalable web applications, modern user interfaces, and intuitive digital experiences.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
+          <a href="#projects" class="px-6 py-3 rounded-xl font-semibold bg-brand-600 hover:bg-brand-500 text-white shadow-lg shadow-brand-600/30 hover:scale-[1.02] transition-all flex items-center gap-2">
+            <span>Explore Projects</span>
+            <i data-lucide="sparkles" class="w-4 h-4"></i>
+          </a>
+          <a href="#contact" class="px-6 py-3 rounded-xl font-semibold bg-slate-800/90 hover:bg-slate-700/90 text-slate-200 border border-slate-700 hover:border-slate-600 transition-all flex items-center gap-2">
+            <span>Get in Touch</span>
+            <i data-lucide="mail" class="w-4 h-4"></i>
+          </a>
+          <a href="#resume" id="hero-resume-btn" class="px-4 py-3 rounded-xl font-medium text-slate-400 hover:text-slate-100 hover:bg-slate-800/40 transition-all flex items-center gap-2">
+            <i data-lucide="file-text" class="w-4 h-4"></i>
+            <span>Resume</span>
+          </a>
+        </div>
+
+        <!-- Social Icons -->
+        <div class="pt-4 flex items-center justify-center lg:justify-start gap-3" id="hero-socials">
+          <!-- Populated dynamically via JS -->
+        </div>
+      </div>
+
+      <!-- Right Profile / Visual Card -->
+      <div class="relative flex-shrink-0 flex items-center justify-center">
+        <!-- Glow behind card -->
+        <div class="absolute inset-0 bg-gradient-to-tr from-brand-600 to-cyan-500 rounded-3xl blur-2xl opacity-30 transform scale-95"></div>
+
+        <div class="relative w-64 h-64 sm:w-80 sm:h-80 rounded-3xl p-2 bg-gradient-to-tr from-slate-800 via-slate-700/60 to-slate-800 border border-slate-700/80 shadow-2xl overflow-hidden glass-card">
+          <img
+            id="hero-avatar"
+            src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80"
+            alt="Profile Avatar"
+            class="w-full h-full object-cover rounded-2xl"
+          />
+        </div>
+
+        <!-- Floating Metric Badge 1 -->
+        <div class="absolute -bottom-4 -left-4 sm:-left-6 px-4 py-2.5 rounded-2xl glass-card bg-slate-900/90 border border-slate-700 shadow-xl flex items-center gap-3 animate-float">
+          <div class="w-10 h-10 rounded-xl bg-brand-500/20 text-brand-400 flex items-center justify-center">
+            <i data-lucide="code-2" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <p class="text-xs text-slate-400 font-medium">Clean Code</p>
+            <p class="text-sm font-bold text-white">Full-Stack</p>
+          </div>
+        </div>
+
+        <!-- Floating Metric Badge 2 -->
+        <div class="absolute -top-4 -right-4 sm:-right-6 px-4 py-2.5 rounded-2xl glass-card bg-slate-900/90 border border-slate-700 shadow-xl flex items-center gap-3 animate-float" style="animation-delay: 2s;">
+          <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center">
+            <i data-lucide="check-circle-2" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <p class="text-xs text-slate-400 font-medium">Status</p>
+            <p class="text-sm font-bold text-white">Open to Work</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== ABOUT ME SECTION ==================== -->
+    <section id="about" class="space-y-12">
+      <div class="text-center max-w-2xl mx-auto space-y-3">
+        <h2 class="text-xs sm:text-sm font-mono uppercase tracking-widest text-brand-400 font-semibold">About Me</h2>
+        <p class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Driven by Curiosity & Impact</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <!-- Story Card -->
+        <div class="lg:col-span-7 glass-card rounded-3xl p-6 sm:p-8 space-y-5">
+          <h3 class="text-xl font-bold text-white flex items-center gap-2">
+            <i data-lucide="user" class="w-5 h-5 text-brand-400"></i>
+            <span>My Journey</span>
+          </h3>
+          <div id="about-story" class="space-y-4 text-slate-300 text-sm sm:text-base leading-relaxed">
+            <!-- Dynamic Bio Paragraphs -->
+          </div>
+
+          <!-- Quick Stats Grid -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4 border-t border-slate-700/60" id="about-stats">
+            <!-- Populated via JS -->
+          </div>
+        </div>
+
+        <!-- Highlight Pillars -->
+        <div class="lg:col-span-5 grid grid-cols-1 gap-4" id="about-highlights">
+          <!-- Populated via JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SKILLS & TECH STACK ==================== -->
+    <section id="skills" class="space-y-12">
+      <div class="text-center max-w-2xl mx-auto space-y-3">
+        <h2 class="text-xs sm:text-sm font-mono uppercase tracking-widest text-brand-400 font-semibold">Technologies</h2>
+        <p class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Skills & Capabilities</p>
+        <p class="text-slate-400 text-sm sm:text-base">Modern frameworks, languages, and tools I use to turn ideas into reality.</p>
+      </div>
+
+      <!-- Skills Categories Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="skills-container">
+        <!-- Populated via JS -->
+      </div>
+    </section>
+
+    <!-- ==================== FEATURED PROJECTS ==================== -->
+    <section id="projects" class="space-y-12">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+        <div class="space-y-3">
+          <h2 class="text-xs sm:text-sm font-mono uppercase tracking-widest text-brand-400 font-semibold">Portfolio</h2>
+          <p class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Featured Projects</p>
+          <p class="text-slate-400 text-sm sm:text-base max-w-xl">A curated selection of applications, tools, and side projects I've built.</p>
+        </div>
+
+        <!-- Category Filters -->
+        <div class="flex flex-wrap gap-2" id="project-filters">
+          <button data-filter="all" class="filter-btn active px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-brand-600 text-white shadow-md">All</button>
+          <button data-filter="fullstack" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-slate-800 text-slate-300 hover:text-white">Full Stack</button>
+          <button data-filter="frontend" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-slate-800 text-slate-300 hover:text-white">Frontend</button>
+          <button data-filter="ai" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-slate-800 text-slate-300 hover:text-white">AI / Tools</button>
+          <button data-filter="mobile" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-slate-800 text-slate-300 hover:text-white">Mobile</button>
+        </div>
+      </div>
+
+      <!-- Projects Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="projects-grid">
+        <!-- Populated via JS -->
+      </div>
+    </section>
+
+    <!-- ==================== EXPERIENCE & TIMELINE ==================== -->
+    <section id="timeline" class="space-y-12">
+      <div class="text-center max-w-2xl mx-auto space-y-3">
+        <h2 class="text-xs sm:text-sm font-mono uppercase tracking-widest text-brand-400 font-semibold">Background</h2>
+        <p class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Experience & Education</p>
+        <p class="text-slate-400 text-sm sm:text-base">A chronological look at my career path and academic journey.</p>
+      </div>
+
+      <!-- Timeline Container -->
+      <div class="max-w-3xl mx-auto relative pl-6 sm:pl-8 border-l-2 border-slate-700/80 space-y-8" id="timeline-container">
+        <!-- Populated via JS -->
+      </div>
+    </section>
+
+    <!-- ==================== CONTACT SECTION ==================== -->
+    <section id="contact" class="space-y-12">
+      <div class="text-center max-w-2xl mx-auto space-y-3">
+        <h2 class="text-xs sm:text-sm font-mono uppercase tracking-widest text-brand-400 font-semibold">Get In Touch</h2>
+        <p class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Let's Build Something Great</p>
+        <p class="text-slate-400 text-sm sm:text-base">Whether you have an upcoming project, opportunity, or just want to connect, feel free to drop a line!</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <!-- Left: Quick Contact Details -->
+        <div class="lg:col-span-5 space-y-6">
+          <div class="glass-card rounded-3xl p-6 sm:p-8 space-y-6">
+            <h3 class="text-xl font-bold text-white">Contact Information</h3>
+            <p class="text-slate-300 text-sm leading-relaxed">
+              I'm always excited to hear about new roles, open source initiatives, and innovative products.
+            </p>
+
+            <div class="space-y-4">
+              <!-- Location -->
+              <div class="flex items-center gap-4">
+                <div class="w-10 h-10 rounded-xl bg-brand-500/20 text-brand-400 flex items-center justify-center flex-shrink-0">
+                  <i data-lucide="map-pin" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <p class="text-xs text-slate-400 font-medium">Location</p>
+                  <p class="text-sm font-semibold text-white" id="contact-location">San Francisco, CA</p>
+                </div>
+              </div>
+
+              <!-- Email with Copy Button -->
+              <div class="flex items-center justify-between gap-4 p-3 rounded-2xl bg-slate-800/60 border border-slate-700/60">
+                <div class="flex items-center gap-3 overflow-hidden">
+                  <div class="w-9 h-9 rounded-xl bg-brand-500/20 text-brand-400 flex items-center justify-center flex-shrink-0">
+                    <i data-lucide="mail" class="w-4 h-4"></i>
+                  </div>
+                  <div class="truncate">
+                    <p class="text-[11px] text-slate-400 font-medium">Direct Email</p>
+                    <p class="text-xs sm:text-sm font-semibold text-white truncate" id="contact-email">alex.morgan.dev@example.com</p>
+                  </div>
+                </div>
+                <button id="copy-email-btn" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-brand-600/80 hover:bg-brand-600 text-white transition-all flex items-center gap-1.5 flex-shrink-0">
+                  <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+                  <span id="copy-btn-text">Copy</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Social Links in Contact Card -->
+            <div class="pt-4 border-t border-slate-700/60">
+              <p class="text-xs text-slate-400 mb-3 font-medium">Find me online</p>
+              <div class="flex items-center gap-2" id="contact-socials">
+                <!-- Populated via JS -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Message Form -->
+        <div class="lg:col-span-7">
+          <form id="contact-form" class="glass-card rounded-3xl p-6 sm:p-8 space-y-5">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div class="space-y-1.5">
+                <label for="form-name" class="block text-xs font-semibold text-slate-300">Your Name *</label>
+                <input
+                  type="text"
+                  id="form-name"
+                  required
+                  placeholder="Jane Doe"
+                  class="w-full px-4 py-3 rounded-xl bg-slate-800/80 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 transition-all text-sm"
+                />
+              </div>
+              <div class="space-y-1.5">
+                <label for="form-email" class="block text-xs font-semibold text-slate-300">Your Email *</label>
+                <input
+                  type="email"
+                  id="form-email"
+                  required
+                  placeholder="jane@example.com"
+                  class="w-full px-4 py-3 rounded-xl bg-slate-800/80 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 transition-all text-sm"
+                />
+              </div>
+            </div>
+
+            <div class="space-y-1.5">
+              <label for="form-subject" class="block text-xs font-semibold text-slate-300">Subject *</label>
+              <input
+                type="text"
+                id="form-subject"
+                required
+                placeholder="Project inquiry / Opportunity"
+                class="w-full px-4 py-3 rounded-xl bg-slate-800/80 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 transition-all text-sm"
+              />
+            </div>
+
+            <div class="space-y-1.5">
+              <label for="form-message" class="block text-xs font-semibold text-slate-300">Your Message *</label>
+              <textarea
+                id="form-message"
+                rows="5"
+                required
+                placeholder="Tell me about your project, timeline, and goals..."
+                class="w-full px-4 py-3 rounded-xl bg-slate-800/80 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 transition-all text-sm resize-none"
+              ></textarea>
+            </div>
+
+            <button
+              type="submit"
+              id="form-submit-btn"
+              class="w-full sm:w-auto px-8 py-3.5 rounded-xl font-semibold bg-brand-600 hover:bg-brand-500 text-white shadow-lg shadow-brand-600/30 hover:shadow-brand-600/50 hover:scale-[1.01] transition-all flex items-center justify-center gap-2"
+            >
+              <span id="submit-btn-label">Send Message</span>
+              <i data-lucide="send" class="w-4 h-4"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="border-t border-slate-800/80 py-10 bg-slate-950/40 relative z-10 text-xs sm:text-sm text-slate-400">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <span class="font-mono text-brand-400">&lt;/&gt;</span>
+        <span>Designed &amp; Built with precision. &copy; <span id="footer-year">2026</span> <strong class="text-slate-200" id="footer-name">Yash Rana</strong>.</span>
+      </div>
+
+      <div class="flex items-center gap-6">
+        <a href="#hero" class="hover:text-brand-400 transition-colors flex items-center gap-1">
+          <span>Back to Top</span>
+          <i data-lucide="arrow-up" class="w-3.5 h-3.5"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 px-4 py-3 rounded-2xl glass-card bg-slate-900/95 border border-slate-700 text-white shadow-2xl flex items-center gap-3 hide">
+    <div class="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center flex-shrink-0" id="toast-icon-container">
+      <i data-lucide="check" class="w-4 h-4"></i>
+    </div>
+    <div class="text-xs sm:text-sm" id="toast-message">Notification message here</div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="portfolio-data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
